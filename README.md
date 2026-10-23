@@ -69,7 +69,7 @@ dist/chunks/debug-*.js      lil-gui — лише для ?debug=1
 dist/assets/                кадри, тіні, панорама, зони, manifest, angles
 dist/config.json            калібрування
 dist/index.html             демо;  dist/embed-example.html — приклад вбудовування
-dist/_headers, vercel.json  CORS і кешування для хостингу
+dist/_headers               CORS і кешування для Cloudflare Pages / Netlify
 ```
 
 ### Розгорнуто: GitHub Pages
@@ -95,7 +95,9 @@ GitHub Pages віддає `Access-Control-Allow-Origin: *`, тож модуль 
 статичний хостинг — достатньо залити вміст `dist/`:
 
 - **Cloudflare Pages / Netlify** — `dist/_headers` уже містить CORS.
-- **Vercel** — `dist/vercel.json` уже містить CORS.
+- **Vercel** — імпортуйте репозиторій як **один проєкт** (застосунок Vite у корені, «Імпорт одного проекту»).
+  Python-пайплайн — офлайн-інструмент, його не деплоять; пропозицію «багатосервісного проєкту» ігноруйте.
+  `vercel.json` у корені задає збірку (`npm run build` → `dist`) і CORS.
 - **Cloudflare R2 / S3** — увімкніть CORS на бакеті:
   ```json
   [{ "AllowedOrigins": ["*"], "AllowedMethods": ["GET", "HEAD"], "AllowedHeaders": ["*"], "MaxAgeSeconds": 86400 }]
