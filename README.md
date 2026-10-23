@@ -72,7 +72,24 @@ dist/index.html             демо;  dist/embed-example.html — прикла�
 dist/_headers, vercel.json  CORS і кешування для хостингу
 ```
 
-### Хостинг
+### Розгорнуто: GitHub Pages
+
+**https://yara-shpak.github.io/soldier-viewer/** — демо (`?debug=1` — калібрування), приклад вбудовування —
+`embed-example.html`. Кожен push у `main` збирає і публікує `dist/` (`.github/workflows/pages.yml`).
+GitHub Pages віддає `Access-Control-Allow-Origin: *`, тож модуль можна імпортувати на будь-якому сайті:
+
+```html
+<div id="soldier-viewer" style="height:100svh"></div>
+<script type="module">
+  import { createSoldierViewer } from 'https://yara-shpak.github.io/soldier-viewer/soldier-viewer.js';
+  createSoldierViewer(document.getElementById('soldier-viewer'));
+</script>
+```
+
+Калібрування на живому сайті: змініть `public/config.json`, закомітьте — за ~30 с зміни на Pages.
+Оновлення кадрів: перезапустіть пайплайн локально (вхідні файли в репозиторій не входять) і закомітьте `public/assets`.
+
+### Інший хостинг
 
 Ассети хостяться окремо від сайту (Webflow Assets не зберігає структуру папок та імена файлів). Підійде будь-який
 статичний хостинг — достатньо залити вміст `dist/`:
