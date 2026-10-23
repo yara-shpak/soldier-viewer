@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "frameCount": 145,
+  "indexPad": 3,
+  "source": {
+    "width": 960,
+    "height": 960,
+    "fps": 30.0
+  },
+  "crop": {
+    "x": 164,
+    "y": 72,
+    "width": 556,
+    "height": 872
+  },
+  "sets": {
+    "full": {
+      "path": "soldier/full/{index}.webp",
+      "width": 556,
+      "height": 872
+    },
+    "half": {
+      "path": "soldier/half/{index}.webp",
+      "width": 278,
+      "height": 436
+    }
+  },
+  "shadow": {
+    "path": "shadow/{index}.webp",
+    "width": 278,
+    "height": 436
+  },
+  "anchor": {
+    "source": {
+      "x": 485.83,
+      "y": 845.0
+    },
+    "crop": {
+      "x": 321.83,
+      "y": 773.0
+    }
+  },
+  "headTopY": {
+    "source": 102.0,
+    "crop": 30.0
+  },
+  "frontWidth": {
+    "source": 371.0
+  },
+  "svgScale": 1.0,
+  "angles": "angles.json",
+  "zones": {
+    "svg": "zones.svg",
+    "content": "zones.json"
+  },
+  "pano": {
+    "dir": "pano/",
+    "variants": {
+      "pano_4096": {
+        "width": 2880,
+        "height": 1440,
+        "blur": {
+          "0": "pano_4096.jpg",
+          "2": "pano_4096_b2.jpg",
+          "4": "pano_4096_b4.jpg"
+        }
+      },
+      "pano_preview": {
+        "width": 1024,
+        "height": 512,
+        "blur": {
+          "0": "pano_preview.jpg"
+        }
+      }
+    },
+    "upscaledSource": false
+  }
+}

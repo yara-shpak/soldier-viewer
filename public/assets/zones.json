@@ -1,0 +1,62 @@
+[
+  {
+    "key": "pants",
+    "title": "Бойові штани (з вирізами під наколінники)",
+    "description": ""
+  },
+  {
+    "key": "plate_carrier",
+    "title": "Плитоноска",
+    "description": ""
+  },
+  {
+    "key": "combat_shirt",
+    "title": "Бойова сорочка",
+    "description": ""
+  },
+  {
+    "key": "pack_straps",
+    "title": "Лямки рюкзака",
+    "description": ""
+  },
+  {
+    "key": "sleeves",
+    "title": "Рукави (передпліччя)",
+    "description": ""
+  },
+  {
+    "key": "balaclava",
+    "title": "Балаклава",
+    "description": ""
+  },
+  {
+    "key": "helmet",
+    "title": "Шолом",
+    "description": ""
+  },
+  {
+    "key": "boots",
+    "title": "Тактичні черевики",
+    "description": ""
+  },
+  {
+    "key": "groin_protector",
+    "title": "Захист паху",
+    "description": ""
+  },
+  {
+    "key": "knee_pads",
+    "title": "Наколінники",
+    "description": ""
+  },
+  {
+    "key": "gloves",
+    "title": "Тактичні рукавиці",
+    "description": ""
+  },
+  {
+    "key": "goggles",
+    "title": "Балістичні окуляри",
+    "description": ""
+  }
+]

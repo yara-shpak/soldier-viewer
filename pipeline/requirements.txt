@@ -1,0 +1,6 @@
+numpy>=2.0
+opencv-contrib-python>=4.10
+Pillow>=10.1
+rembg[cpu]==2.0.86
+pyyaml>=6.0
+matplotlib>=3.8

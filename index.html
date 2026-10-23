@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Soldier 360 Viewer</title>
+    <style>
+      html, body { margin: 0; background: #dfdfd5; font-family: system-ui, sans-serif; }
+      #soldier-viewer { height: 100svh; }
+      .after { padding: 48px 24px; color: #555; max-width: 640px; margin: 0 auto; }
+    </style>
+  </head>
+  <body>
+    <div id="soldier-viewer"></div>
+    <div class="after">
+      Вертикальний свайп прокручує сторінку, горизонтальний — обертає солдата.
+      Debug-режим: <a href="?debug=1">?debug=1</a>. Режим без WebGL: <a href="?renderer=2d">?renderer=2d</a>.
+    </div>
+    <script type="module">
+      import { createSoldierViewer } from './src/index.ts';
+      const q = new URLSearchParams(location.search);
+      const viewer = await createSoldierViewer(document.getElementById('soldier-viewer'), {
+        assetBase: './assets/',
+        ...(q.get('renderer') ? { renderer: q.get('renderer') } : {}),
+      });
+      window.viewer = viewer;
+      window.__readyAt = performance.now();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+.venv/
+node_modules/
+build_tmp/
+dist/
+.claude/
+._*
+.DS_Store
+
+# Вхідні файли не публікуються (див. source/README.md)
+source/*
+!source/README.md
+
+# QA-скріншоти і записи генеруються тестами
+qa/screens/

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Embed example</title>
+    <style>
+      body { margin: 0; font-family: system-ui, sans-serif; color: #222; background: #fff; }
+      header, section { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+      pre { background: #f3f3ef; padding: 16px; overflow: auto; border-radius: 6px; font-size: 13px; }
+      .viewer { height: min(100svh, 820px); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Приклад вбудовування</h1>
+      <p>Блок нижче вставлено так само, як у Webflow Code Embed. Модуль сам знаходить <code>assets/</code> поруч із собою.</p>
+    </header>
+
+    <!-- ↓ Вміст Code Embed -->
+    <div id="soldier-viewer" class="viewer"></div>
+    <script type="module">
+      import { createSoldierViewer } from './soldier-viewer.js';
+      createSoldierViewer(document.getElementById('soldier-viewer'))
+        .then((viewer) => {
+          viewer.on('zone:select', (key) => console.log('zone:select', key));
+          window.viewer = viewer;
+        })
+        .catch((err) => console.error(err));
+    </script>
+    <!-- ↑ Вміст Code Embed -->
+
+    <section>
+      <h2>Код для Webflow</h2>
+      <pre>&lt;div id="soldier-viewer" style="height:100svh"&gt;&lt;/div&gt;
+&lt;script type="module"&gt;
+  import { createSoldierViewer } from 'https://&lt;host&gt;/soldier-viewer.js';
+  createSoldierViewer(document.getElementById('soldier-viewer'));
+&lt;/script&gt;</pre>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+# Параметри пайплайну. Значення з позначкою [калібрування] — стартові,
+# підбираються візуально (див. README, розділ «Калібрування»).
+# Піксельні значення задаються для кадру 960 px і масштабуються
+# пропорційно до фактичної ширини відео (scale = width / 960).
+
+paths:
+  video: source/soldier.mp4
+  svg: source/zones.svg
+  pano: source/hangar_360.png
+  pano_upscaled: source/hangar_360_upscaled.png
+  tmp: build_tmp
+  qa: qa
+  public: public/assets
+
+plate:
+  rough_threshold: 18        # грубий поріг |I − median| для пошуку вільних пікселів
+  covered_fraction: 0.9      # піксель вважається «ядром», якщо закритий у >90% кадрів
+  poly_degree: 3             # 2D-поліном для заповнення ядра
+  max_error: 3.0             # перевірка: середня |кадр − B| на вільних пікселях
+
+ai:
+  model: birefnet-general
+  fallback_model: isnet-general-use
+
+matte:
+  t0: 6                      # [калібрування] поріг різниці з B, нижче — фон
+  t1: 25                     # [калібрування] вище — повністю солдат
+  shadow_k_min: 0.55         # I ≈ k·B, k ∈ [k_min, 1] і збережена хроматичність → тінь (контактна тінь під підошвою темніша за 0.8)
+  shadow_chroma_tol: 0.035   # допуск хроматичності для класифікації тіні
+  ai_dilate_px: 5
+  guided_radius: 4
+  guided_eps: 1.0e-4
+  choke_px: 0                # 0–1 px ерозії після деконтамінації
+  decontam_min_alpha: 0.02
+  edge_color_tol: 12         # F краю ≤ колір внутрішніх сусідів + tol
+  edge_blend_alpha: 0.3      # при α < 0.3 колір краю тягнеться до внутрішніх сусідів
+  temporal_edge_smooth: false
+
+shadow:
+  ellipse_rx: 0.32           # [калібрування] частка W
+  ellipse_ry: 0.10           # [калібрування] частка H
+  ellipse_feather_px: 40     # [калібрування]
+  noise_floor: auto          # або число, напр. 0.012
+  blur_sigma_px: 4
+  temporal_radius: 2         # ±2 кадри
+  gain: 4                    # [калібрування]
+  max_opacity: 0.6           # [калібрування]
+
+angles:
+  loop_search_from: 120      # кінець петлі K шукаємо в [loop_search_from, last]
+  loop_plateau_tol: 0.02     # кадри з оцінкою ≤ min + tol вважаються плато зупинки
+  flow_band_px: 0            # 0 = вся маска солдата
+
+seam:
+  crossfadeFrames: 0         # 0 або 3
+
+export:
+  crop_pad_px: 24
+  soldier_quality: 85
+  soldier_alpha_quality: 100
+  shadow_quality: 70
+  budget_full_mb: 9.0
+  budget_half_mb: 3.5
+  budget_shadow_mb: 0.6
+  # Тонування солдата під ангар (запікається). 1.0 / 0 = без змін.
+  tone:
+    brightness: 1.0          # [калібрування]
+    contrast: 1.0            # [калібрування]
+    saturation: 1.0          # [калібрування]
+    temperature: 0.0         # [калібрування] −1…1, >0 тепліше
+
+zones:
+  # fill → key, порядок = порядок малювання (великі спочатку, дрібні зверху)
+  colors:
+    "#8B5CF6": pants
+    "#2F7BFF": plate_carrier
+    "#EC4899": combat_shirt
+    "#FFD400": pack_straps
+    "#FF3B3B": sleeves
+    "#A855F7": balaclava
+    "#FF7A1A": helmet
+    "#06B6D4": boots
+    "#10B981": groin_protector
+    "#D946EF": knee_pads
+    "#22C55E": gloves
+    "#38BDF8": goggles
+  titles:
+    helmet: Шолом
+    goggles: Балістичні окуляри
+    balaclava: Балаклава
+    combat_shirt: Бойова сорочка
+    pack_straps: Лямки рюкзака
+    plate_carrier: Плитоноска
+    sleeves: Рукави (передпліччя)
+    gloves: Тактичні рукавиці
+    groin_protector: Захист паху
+    pants: Бойові штани (з вирізами під наколінники)
+    knee_pads: Наколінники
+    boots: Тактичні черевики
+  float_precision: 1
+
+pano:
+  width: 4096
+  preview_width: 1024
+  quality: 88
+  seam_blend_px: 16         # ±px для 2880 ширини
+  seam_max_ratio: 1.3       # шов / сусідні колонки; вище — змішувати
+  nadirPatch: false
+  nadir_fraction: 0.08
+  blurPx: [0, 2, 4]

@@ -1,0 +1,14 @@
+# Cloudflare Pages / Netlify: модуль і ассети вантажаться з іншого домену (Webflow),
+# тому потрібен CORS: ES-модуль, JSON і WebGL-текстура панорами без нього не завантажаться.
+/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+
+/assets/*
+  Cache-Control: public, max-age=86400
+
+/soldier-viewer.js
+  Cache-Control: public, max-age=300
+
+/config.json
+  Cache-Control: no-cache
